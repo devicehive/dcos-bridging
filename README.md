@@ -23,6 +23,13 @@ Adjusted the following lines in mqttclient.json and ws-node-docker.json files:
         "https://<the place where with docker config tar.gz file>"
     ]
 
+Change the URL to your docker repository:
+
+	"image": "docker-registry.service.consul:5000/",
+
+it should point to your Amazon EC2 Container Service registry.
+
+
 You can deploy applications using dcos command line tools:
 
 ```dcos marathon add marathon/mosquitto.json```
@@ -31,3 +38,9 @@ You can deploy applications using dcos command line tools:
 
 ```dcos marathon add marathon/ws-node-docker.json```
 
+
+To make mosquitto mqtt broker accessible from outer internet you also need to deploy marathon load balancer:
+
+```dcos package install marathon-lb```
+
+More details could be found at https://mesosphere.com/blog/2015/12/04/dcos-marathon-lb/.
