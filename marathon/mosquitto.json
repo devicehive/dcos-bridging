@@ -1,0 +1,60 @@
+{
+    "id": "/mosquitto",
+    "cpus": 2,
+    "mem": 2048,
+    "requirePorts": false,
+    "instances": 1,
+    "container": {
+        "type": "DOCKER",
+        "docker": {
+            "image": "toke/mosquitto",
+            "forcePullImage": true,
+            "network": "BRIDGE",
+            "portMappings": [{
+                "containerPort": 1883,
+                "hostPort": 0,
+                "protocol": "tcp"
+            }, {
+                "containerPort": 9001,
+                "hostPort": 0,
+                "protocol": "tcp"
+            }],
+            "privileged": false
+        },
+        "volumes": [{
+            "containerPath": "/mqtt/data",
+            "hostPath": "/var/mqtt/data",
+            "mode": "RW"
+        }, {
+            "containerPath": "/mqtt/log",
+            "hostPath": "/var/mqtt/log",
+            "mode": "RW"
+        }]
+    },
+    "env": {
+        "SERVICE_PORT0_NAME": "{{NAME}}-mqtt",
+        "SERVICE_PORT1_NAME": "{{NAME}}-ws"
+    },
+    "constraints": [
+        ["hostname", "UNIQUE"]
+    ],
+    "healthChecks": [{
+        "protocol": "TCP",
+        "gracePeriodSeconds": 60,
+        "intervalSeconds": 5,
+        "portIndex": 1,
+        "timeoutSeconds": 5,
+        "maxConsecutiveFailures": 3
+    }],
+    "backoffSeconds": 1,
+    "backoffFactor": 1.15,
+    "maxLaunchDelaySeconds": 3600,
+    "upgradeStrategy": {
+        "minimumHealthCapacity": 0.5,
+        "maximumOverCapacity": 0.2
+    },
+
+    "labels": {
+        "HAPROXY_GROUP": "external"
+    }
+}

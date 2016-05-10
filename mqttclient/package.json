@@ -1,0 +1,10 @@
+{
+  "name": "docker-node",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Node.js Websocket client app on CentOS using docker",
+  "dependencies": {
+    "mqtt": "1.8.0",
+    "ws": "1.0.1"
+  }
+}

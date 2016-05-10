@@ -1,0 +1,39 @@
+{
+    "id": "/mqttclient",
+    "cpus": 2,
+    "mem": 1024,
+    "requirePorts": false,
+    "instances": 1,
+    "container": {
+        "type": "DOCKER",
+        "docker": {
+            "image": "docker-registry.service.consul:5000/node-docker",
+            "forcePullImage": true,
+            "network": "BRIDGE",
+            "privileged": false
+        },
+        "volumes": [{
+            "containerPath": "/var/log/node",
+            "hostPath": "/var/log/node",
+            "mode": "RW"
+        }]
+    },
+    "env": {
+        "MOSQUITTO_MQTT_TOPIC": "<mosquitto_topic>",
+        "SCRIPTR_CHAT": "<my_scriptr_chat_name>",
+        "SCRIPTR_TOKEN": "<my_scriptr_token>"
+    },
+    "constraints": [
+        ["hostname", "UNIQUE"]
+    ],
+    "backoffSeconds": 1,
+    "backoffFactor": 1.15,
+    "maxLaunchDelaySeconds": 3600,
+    "upgradeStrategy": {
+        "minimumHealthCapacity": 0.5,
+        "maximumOverCapacity": 0.2
+    },
+    "uris": [
+        "https://<the place where with docker config tar.gz file>"
+    ]
+}
