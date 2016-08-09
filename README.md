@@ -30,15 +30,19 @@ After repository created you should see the web page with instructions describin
  * Install prerequisites: ```sudo yum install git docker```, and start docker service ```sudo service docker start```
  * Install aws cli: ```sudo pip install awscli --ignore-installed six```;
  * Configure environment:
- ** Create IAM role and generate credentials (it will be used on the next step);
- ** Configure aws cli: ```aws configure```;
- ** Perform ECR login ```aws ecr get-login --region us-east-1```;
- ** And run the command printed on the command line;
+
+  * Create IAM role and generate credentials (it will be used on the next step);
+  * Configure aws cli: ```aws configure```;
+  * Perform ECR login ```aws ecr get-login --region us-east-1```;
+  * And run the command printed on the command line;
+ 
  * Download the source code from github using clone command and navigate to docker image directory;
  * Build and publish docker image, run next commands (*):
- ** ```docker build -t my_docker_image_name .```
- ** ```docker tag my_docker_image_name:latest 203515518953.dkr.ecr.us-east-1.amazonaws.com/my_docker_image_name:latest```
- ** ```docker push 203515518953.dkr.ecr.us-east-1.amazonaws.com/my_docker_image_name:latest```
+
+  * ```docker build -t my_docker_image_name .```
+  * ```docker tag my_docker_image_name:latest 203515518953.dkr.ecr.us-east-1.amazonaws.com/my_docker_image_name:latest```
+  * ```docker push 203515518953.dkr.ecr.us-east-1.amazonaws.com/my_docker_image_name:latest```
+
  * Now navigate to your ECR and check that image is there.
 (*) Please note that provided commands are specific to my account, and you need to adjust them accordingly. To find repository url you can open ECR web page, click on repository, find button with text “View Push Commands” and click on it.
 
