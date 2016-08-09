@@ -11,6 +11,8 @@ Deployed DC/OS cluster required to run bridges. You can follow instructions avai
 There are several options available like AWS, Google Cloud. Simplest in our case is using [AWS CloudFormation template](https://docs.mesosphere.com/1.7/administration/installing/cloud/aws/).
 Once managed environment is ready, you might want to open Web UI and check status of your stack.
 
+You will need DC/OS command line tools to smiplify the process. In order to install and authenticate them please follow the [installation](https://dcos.io/docs/1.7/usage/cli/install/) and [configuration](https://dcos.io/docs/1.7/usage/cli/configure/) instructions.
+
 ## Prepare private bridge docker image
 
 This section describes additional information on storing private docker images.
@@ -68,18 +70,28 @@ Get the url for the docker.tar.gz file in S3 bucket (right click on file in S3 U
 Update your marathon files with your details. The very first thinhg you might need to update is image docker registry.
 You can navigate to Amazon EC2 Container Services and get repository name from there and extend it with image name.
 Find the line 
+
     ```"image": "docker-registry.service.consul:5000/",```
+
 and replace for example with (please note that url will be different for you):
+
     ```"image": "203515518953.dkr.ecr.us-east-1.amazonaws.com/my_docker_image_name:latest",```
 
 Now you need to find the next lines
+
+```
     "uris": [
         "https://<the place where with docker config tar.gz file>"
     ]
+```
+
 and replace it with the link to your docker.tar.gz file stored on S3:
+
+```
     "uris": [
         "https://https://s3.amazonaws.com/mybucket/myconf.tar.gz"
     ]
+```
 
 You can deploy applications using dcos command line tools:
 
