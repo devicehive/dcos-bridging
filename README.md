@@ -7,7 +7,7 @@ The following steps describe cluster creation and application deployment.
 
 ## Pre-requisites
 
-A deployed DC/OS cluster required to run bridges. You can follow the instructions available on the DC/OS web site to create an environment.
+A deployed DC/OS cluster is required to run bridges. You can follow the instructions available on the DC/OS web site to create an environment.
 There are several options (like AWS, Google Cloud) available. The simplest one in our case is using the [AWS CloudFormation template](https://docs.mesosphere.com/1.7/administration/installing/cloud/aws/).
 Once the managed environment is ready, you might want to open the Web UI and check the status of your stack.
 
