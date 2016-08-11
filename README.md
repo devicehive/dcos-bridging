@@ -1,7 +1,7 @@
 
 # Intro
 
-DC/OS deployable bridge-adapters to various protocols / IoT data sources.
+DC/OS deployable bridge-adapters for various protocols / IoT data sources.
 
 The following steps describe cluster creation and application deployment.
 
